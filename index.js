@@ -6,7 +6,16 @@ let countClick = 0;
 let numberOfClicks = 0;
 
 let highScore = document.querySelector(".hi-score");
-highScore.innerHTML = "Highest score: "+ localStorage.getItem('high');
+//highScore.innerHTML = "Highest score: "+ localStorage.getItem('high');
+let aux = localStorage.getItem('high');
+
+if (aux == null || aux == 0){
+    localStorage.setItem('high', 0);
+    highScore.innerHTML = "Highest score: "+ localStorage.getItem('high');
+}else{
+  highScore.innerHTML = "Highest score: "+ localStorage.getItem('high');
+}
+
 
 function genareteRandomColor(){
     const random = Math.floor(Math.random() * colors.length);
@@ -94,6 +103,7 @@ function waitForClick() {
 }
 
 function updateHighScore(value){
+
   if (value > parseInt(localStorage.getItem('high'))){
     localStorage.setItem('high', value);
     highScore.innerHTML = "Highest score: "+ localStorage.getItem('high');
@@ -101,3 +111,4 @@ function updateHighScore(value){
 
   
 }
+
