@@ -1,9 +1,12 @@
 const colors = document.querySelectorAll(".inner");
 let score = document.querySelector(".score");
-
+//localStorage.setItem('high', 0);
 let track = [];
 let countClick = 0;
 let numberOfClicks = 0;
+
+let highScore = document.querySelector(".hi-score");
+highScore.innerHTML = "Highest score: "+ localStorage.getItem('high');
 
 function genareteRandomColor(){
     const random = Math.floor(Math.random() * colors.length);
@@ -60,7 +63,7 @@ async function playGame(array, countClick){
 
 function gameEnd(){
   alert("acabou!")
-  
+  updateHighScore(track.length - 1);
   score.style.visibility = 'visible'
   score.innerHTML = `Final Score: ${track.length - 1}`;
   numberOfClicks = 0;
@@ -88,4 +91,13 @@ function waitForClick() {
       el.addEventListener('click', handler);
     });
   });
+}
+
+function updateHighScore(value){
+  if (value > parseInt(localStorage.getItem('high'))){
+    localStorage.setItem('high', value);
+    highScore.innerHTML = "Highest score: "+ localStorage.getItem('high');
+  }
+
+  
 }
